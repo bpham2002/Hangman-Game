@@ -20,9 +20,9 @@
             <div class="col" id="instruction">
                 <h2 id="startGame"></h2>
                 <input type="button" id="startBtn" value="Start" size='15' onclick="startGame()">
-                <h3 id="word"></h3>
+                <h3 id="word">New word</h3>
                 <input type="text" id="user-guess" size="15" onkeyup="userGuess(event)">
-                <p id="user-text"></p>
+                <p id="your-chances"></p>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
         var selWord
         var viewWord = []
         var randWord = []
-        var attempts = 0
+        var attempts
 
         function startGame() {
             selWord = theme[Math.floor(Math.random() * 10)]
@@ -49,17 +49,26 @@
                     hidWord[i] = ' '
                 }
             }
+            // document.getElementById("word").innerHTML = "Current Word: " + viewWord
             viewWord = hidWord
-            document.getElementById("word").innerHTML = "Current Word: " + viewWord
+            display()
             document.getElementById("user-guess").value = ""
+            document.getElementById("your-chances").innerHTML = "You chances: " + (16 - attempts)
+        }
+
+        function display() {
+            var span = document.getElementById("word").innerHTML = "Current Word: "
+            for (var i = 0; i < selWord.length; i++) {
+                var view = document.createElement("SPAN")
+                var viewnode = document.createTextNode(viewWord[i] + " ")
+                view.appendChild(viewnode)
+                document.getElementById("word").appendChild(view)
+            }
         }
 
         function userGuess(event) {
             var temp = []
             var userText = event.key;
-
-
-
             for (i = 0; i < selWord.length; i++) {
                 var pos = selWord[i].toLowerCase().search(userText)
                 if (pos < 0) {
@@ -75,11 +84,15 @@
                 } else {
                     viewWord[i] = viewWord[i]
                 }
-
             }
-            document.getElementById("word").innerHTML = "Current Word: " + viewWord
-            document.getElementById("user-text").innerHTML = "You chose: " + userText
             attempts += 1
+            document.getElementById("your-chances").innerHTML = "You chances: " + (16 - attempts)
+            display()
+            check()
+
+        }
+
+        function check() {
             var isEqual = true
             for (var i = 0; i < viewWord.length; i++) {
                 if (viewWord[i] !== randWord[i]) {
@@ -87,14 +100,13 @@
                 }
             }
             if ((isEqual) && (attempts <= 15)) {
-                document.getElementById("word").innerHTML = "Current Word: " + viewWord
-                window.alert("YOU WIN!")
+                display()
+                window.alert("The word is: " + selWord + " " + "YOU WIN!")
                 startGame()
             } else if (attempts > 15) {
                 window.alert("SORRY YOU LOSE!")
                 startGame()
             }
-
         }
     </script>
 </body>
