@@ -24,7 +24,7 @@ function startGame() {
     viewWord = hidWord
     display()
     document.getElementById("user-guess").value = ""
-    document.getElementById("your-chances").innerHTML = "You chances: " + (16 - attempts)
+    document.getElementById("your-chances").innerHTML = "Your chances: " + (16 - attempts)
 }
 
 function display() {
@@ -57,7 +57,7 @@ function userGuess(event) {
         }
     }
     attempts += 1
-    document.getElementById("your-chances").innerHTML = "You chances: " + (16 - attempts)
+    document.getElementById("your-chances").innerHTML = "Your chances: " + (16 - attempts)
     display()
     check()
 
