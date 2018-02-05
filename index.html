@@ -76,19 +76,17 @@
             document.getElementById("word").innerHTML = "Current Word: " + viewWord
             document.getElementById("user-text").innerHTML = "You chose: " + userText
             attempts += 1
-            var isEqual = function(viewWord, randWord) {
-
-                if (viewWord.length !== randWord.length) {
-                    return false;
-
-
-                } else {
-                    return true
+            var isEqual = true
+            for (var i = 0; i < viewWord.length; i++) {
+                if (viewWord[i] !== randWord[i]) {
+                    isEqual = false
                 }
-
             }
-            if (isEqual === true) {
-                window.alert(5)
+            if ((isEqual) && (attempts <= 15)) {
+                document.getElementById("word").innerHTML = "Current Word: " + viewWord
+                window.alert("YOU WIN!")
+            } else if (attempts > 15) {
+                window.alert("SORRY YOU LOSE!")
             }
             console.log(isEqual)
             console.log(randWord)
