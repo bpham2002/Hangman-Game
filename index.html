@@ -10,16 +10,19 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <h1>HANGMAN-GAME</h1>
+    <div class="container" style="background-color: #eeeeee">
+        <div class="row mb-3">
+            <div class="col col-md-12 text-danger">
+                <h1 class="mb-3 text-md-center">HANGMAN-GAME</h1>
             </div>
         </div>
         <div class="row">
-            <div class="col" id="instruction">
+            <div class="col col-md-5">
+                <img src="./assets/images/Hangman-game.png" alt="" class="img-fluid">
+            </div>
+            <div class="col col-md-7 bg-info" id="instruction">
                 <h2 id="startGame"></h2>
-                <input type="button" id="startBtn" value="Start" size='20' onclick="startGame()">
+                <input type="button" id="startBtn" class="btn btn-warning" value="Start" size='20' onclick="startGame()">
                 <h3 id="word">New word</h3>
                 <input type="text" id="user-guess" size="15" onkeyup="userGuess(event)">
                 <p id="your-chances"></p>
