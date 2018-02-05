@@ -30,14 +30,17 @@
         var theme = ["Masha", "Anna", "Brian", "Madona", "Maui", "John", "Mathew", "The Lord of the Rings", "The Notbook", "Crime and Punishment"];
         document.getElementById("startGame").innerHTML = "Please Press Start to Play!";
 
-        var selWord = theme[Math.floor(Math.random() * 10)]
-        console.log(selWord)
+        var selWord
         var viewWord = []
-        var randWord = [] = selWord.split("")
+        var randWord = []
         var attempts = 0
 
         function startGame() {
+            selWord = theme[Math.floor(Math.random() * 10)]
+            console.log(selWord)
+            randWord = selWord.split("")
             var hidWord = []
+            attempts = 0
 
             for (var i = 0; i < selWord.length; i++) {
                 if (selWord[i] !== " ") {
@@ -48,6 +51,7 @@
             }
             viewWord = hidWord
             document.getElementById("word").innerHTML = "Current Word: " + viewWord
+            document.getElementById("user-guess").value = ""
         }
 
         function userGuess(event) {
@@ -85,12 +89,11 @@
             if ((isEqual) && (attempts <= 15)) {
                 document.getElementById("word").innerHTML = "Current Word: " + viewWord
                 window.alert("YOU WIN!")
+                startGame()
             } else if (attempts > 15) {
                 window.alert("SORRY YOU LOSE!")
+                startGame()
             }
-            console.log(isEqual)
-            console.log(randWord)
-            console.log(viewWord)
 
         }
     </script>
