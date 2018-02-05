@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Hangman-Game</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1>HANGMAN-GAME</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" id="instruction">
+                <h2 id="startGame"></h2>
+                <input type="button" id="startBtn" value="Start" size='15' onclick="startGame()">
+                <h3 id="word"></h3>
+                <input type="text" id="user-guess" size="15" onkeyup="userGuess(event)">
+                <p id="user-text"></p>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        var theme = ["Masha", "Anna", "Brian", "Madona", "Maui", "John", "Mathew", "The Lord of the Rings", "The Notbook", "Crime and Punishment"];
+        document.getElementById("startGame").innerHTML = "Please Press Start to Play!";
+
+        var selWord = theme[Math.floor(Math.random() * 10)]
+        console.log(selWord)
+        var viewWord = []
+        var randWord = [] = selWord.split("")
+        var attempts = 0
+
+        function startGame() {
+            var hidWord = []
+
+            for (var i = 0; i < selWord.length; i++) {
+                if (selWord[i] !== " ") {
+                    hidWord[i] = selWord[i].replace(selWord[i], "_")
+                } else {
+                    hidWord[i] = ' '
+                }
+            }
+            viewWord = hidWord
+            document.getElementById("word").innerHTML = "Current Word: " + viewWord
+        }
+
+        function userGuess(event) {
+            var temp = []
+            var userText = event.key;
+
+
+
+            for (i = 0; i < selWord.length; i++) {
+                var pos = selWord[i].toLowerCase().search(userText)
+                if (pos < 0) {
+                    temp[i] = selWord[i].replace(selWord[i], "_")
+                } else {
+                    temp[i] = selWord[i]
+                }
+                if (temp[i] !== "_") {
+                    viewWord[i] = temp[i]
+                } else if (selWord[i] === " ") {
+                    viewWord[i] = ' '
+
+                } else {
+                    viewWord[i] = viewWord[i]
+                }
+
+            }
+            document.getElementById("word").innerHTML = "Current Word: " + viewWord
+            document.getElementById("user-text").innerHTML = "You chose: " + userText
+            attempts += 1
+            var isEqual = function(viewWord, randWord) {
+
+                if (viewWord.length !== randWord.length) {
+                    return false;
+
+
+                } else {
+                    return true
+                }
+
+            }
+            if (isEqual === true) {
+                window.alert(5)
+            }
+            console.log(isEqual)
+            console.log(randWord)
+            console.log(viewWord)
+
+        }
+    </script>
+</body>
+
+</html>
